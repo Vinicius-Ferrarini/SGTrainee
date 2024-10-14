@@ -6,6 +6,7 @@ set scoreboard off
 setmode(25,80)
 lSair := .f.
 dHoje := Date()
+
 do while !lSair
 
    cNome        := Space(30)
@@ -157,10 +158,10 @@ do while !lSair
          endif
       endif
       //Soma
-      nFinalNotaA :=(nNotaA1 + nNotaA2 + nNotaA3 + nNotaA4) /4
-      nFinalNotaB :=(nNotaB1 + nNotaB2 + nNotaB3 + nNotaB4) /4
-      nFinalNotaC :=(nNotaC1 + nNotaC2 + nNotaC3 + nNotaC4) /4
-      nFinalNotaD :=(nNotaD1 + nNotaD2 + nNotaD3 + nNotaD4) /4
+      nFinalNotaA := (nNotaA1 + nNotaA2 + nNotaA3 + nNotaA4) /4
+      nFinalNotaB := (nNotaB1 + nNotaB2 + nNotaB3 + nNotaB4) /4
+      nFinalNotaC := (nNotaC1 + nNotaC2 + nNotaC3 + nNotaC4) /4
+      nFinalNotaD := (nNotaD1 + nNotaD2 + nNotaD3 + nNotaD4) /4
 
       nTotalFaltaA := nFaltaA1 + nFaltaA2 + nFaltaA3 + nFaltaA4
       nTotalFaltaB := nFaltaB1 + nFaltaB2 + nFaltaB3 + nFaltaB4
@@ -373,8 +374,8 @@ do while !lSair
 
          if nDp > 0  //tem DP
             nMensalidadeNova := nMensalidade * (nDp * 0.15 + 1)
-            cMensalidade     := 'A mensalidade era de R$'+ AllTrim(Transform(nMensalidade,"@E 999,999.99")) + ',para R$'+ AllTrim(Transform(nMensalidadeNova,'@E 999,999.99'))
-            cResultado       := 'O aluno ' + AllTrim(cNome) + " foi REPROVADO,pois teve " + Transform(nDp,"9") +" Dependencias em" + cMateriasDP
+            cMensalidade     := 'A mensalidade era de R$'+ AllTrim(Transform(nMensalidade,'@E 999,999.99')) + ',para R$'+ AllTrim(Transform(nMensalidadeNova,'@E 999,999.99'))
+            cResultado       := 'O aluno ' + AllTrim(cNome) + ' foi REPROVADO,pois teve ' + Transform(nDp,'9') +' Dependencias em' + cMateriasDP
 
          else        //Sem Dp
             cMensalidade := 'Mensalidade continua a mesma R$'+ AllTrim(Transform(nMensalidade,'@E 999,999.99'))
@@ -386,12 +387,12 @@ do while !lSair
 
          if nDp > 0  //tem DP
             nMensalidadeNova := nMensalidade * (nDp * 0.15 + 1)
-            cMensalidade     := 'A mensalidade era de R$'+ AllTrim(Transform(nMensalidade,"@E 999,999.99")) + ',para R$'+ AllTrim(Transform(nMensalidadeNova,'@E 999,999.99'))
+            cMensalidade     := 'A mensalidade era de R$'+ AllTrim(Transform(nMensalidade,'@E 999,999.99')) + ',para R$'+ AllTrim(Transform(nMensalidadeNova,'@E 999,999.99'))
 
             if nDp < 2  //quantas
-               cResultado := 'O aluno ' + AllTrim(cNome) + ' foi APROVADO com '+ Transform(nDp,"9") +' DEPENDENCIA em ' + cMateriasDP
+               cResultado := 'O aluno ' + AllTrim(cNome) + ' foi APROVADO com '+ Transform(nDp,'9') +' DEPENDENCIA em ' + cMateriasDP
             else
-               cResultado := 'O aluno ' + AllTrim(cNome) + ' foi REPROVADO,pois ficou com '+ AllTrim(Transform(nDp,"9")) +' DEPENDENCIAS em ' + cMateriasDP
+               cResultado := 'O aluno ' + AllTrim(cNome) + ' foi REPROVADO,pois ficou com '+ AllTrim(Transform(nDp,'9')) +' DEPENDENCIAS em ' + cMateriasDP
             endif
 
          else        //Sem DP
@@ -402,11 +403,11 @@ do while !lSair
       else
          if nDp > 0  //tem DP
             nMensalidadeNova := nMensalidade * (nDp * 0.15 + 1)
-            cMensalidade     := 'A mensalidade era de R$'+ AllTrim(Transform(nMensalidade,"@E 999,999.99")) + ',para R$'+ AllTrim(Transform(nMensalidadeNova,'@E 999,999.99'))
+            cMensalidade     := 'A mensalidade era de R$'+ AllTrim(Transform(nMensalidade,'@E 999,999.99')) + ',para R$'+ AllTrim(Transform(nMensalidadeNova,'@E 999,999.99'))
             if nDp < 3  //quantas
-               cResultado += 'O aluno ' + AllTrim(cNome) + ' foi APROVADO com '+ Transform(nDp,"9") +' DEPENDENCIA em ' + cMateriasDP
+               cResultado += 'O aluno ' + AllTrim(cNome) + ' foi APROVADO com '+ Transform(nDp,'9') +' DEPENDENCIA em ' + cMateriasDP
             else
-               cResultado += 'O aluno ' + AllTrim(cNome) + ' foi REPROVADO,pois ficou com '+ AllTrim(Transform(nDp,"9")) +' DEPENDENCIAS em ' + cMateriasDP
+               cResultado += 'O aluno ' + AllTrim(cNome) + ' foi REPROVADO,pois ficou com '+ AllTrim(Transform(nDp,'9')) +' DEPENDENCIAS em ' + cMateriasDP
             endif
          else        //Sem DP
             cMensalidade := 'Mensalidade continua a mesma R$'+ AllTrim(Transform(nMensalidade,'@E 999,999.99'))
@@ -415,10 +416,10 @@ do while !lSair
 
      //Print Final
       nLinha := 7
-      @ nLinha++,54 say Transform(nFinalNotaA,"@E 99.9") + '|' + Transform(nTotalFaltaA,"99") color(cColorA)
-      @ nLinha++,54 say Transform(nFinalNotaB,"@E 99.9") + '|' + Transform(nTotalFaltaB,"99") color(cColorB)
-      @ nLinha++,54 say Transform(nFinalNotaC,"@E 99.9") + '|' + Transform(nTotalFaltaC,"99") color(cColorC)
-      @ nLinha++,54 say Transform(nFinalNotaD,"@E 99.9") + '|' + Transform(nTotalFaltaD,"99") color(cColorD)
+      @ nLinha++,54 say Transform(nFinalNotaA,'@E 99.9') + '|' + Transform(nTotalFaltaA,'99') color(cColorA)
+      @ nLinha++,54 say Transform(nFinalNotaB,'@E 99.9') + '|' + Transform(nTotalFaltaB,'99') color(cColorB)
+      @ nLinha++,54 say Transform(nFinalNotaC,'@E 99.9') + '|' + Transform(nTotalFaltaC,'99') color(cColorC)
+      @ nLinha++,54 say Transform(nFinalNotaD,'@E 99.9') + '|' + Transform(nTotalFaltaD,'99') color(cColorD)
       @ 20,01 say cResultado
       @ 21,01 say cMensalidade
 
