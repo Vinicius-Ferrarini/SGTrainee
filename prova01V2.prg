@@ -371,20 +371,18 @@ do while !lSair
       //Integral
       if cBolsa = 'I'
          nMensalidade := nMensalidade * 0.02
-
+         cMensalidade := 'Mensalidade continua a mesma R$'+ AllTrim(Transform(nMensalidade,'@E 999,999.99'))
          if nDp > 0  //tem DP
             nMensalidadeNova := nMensalidade * (nDp * 0.15 + 1)
             cMensalidade     := 'A mensalidade era de R$'+ AllTrim(Transform(nMensalidade,'@E 999,999.99')) + ',para R$'+ AllTrim(Transform(nMensalidadeNova,'@E 999,999.99'))
             cResultado       := 'O aluno ' + AllTrim(cNome) + ' foi REPROVADO,pois teve ' + Transform(nDp,'9') +' Dependencias em' + cMateriasDP
 
-         else        //Sem Dp
-            cMensalidade := 'Mensalidade continua a mesma R$'+ AllTrim(Transform(nMensalidade,'@E 999,999.99'))
          endif
 
       //Parcial
       elseif cBolsa = 'P'
          nMensalidade := nMensalidade * 0.5
-
+         cMensalidade := 'Mensalidade continua a mesma R$'+ AllTrim(Transform(nMensalidade,'@E 999,999.99'))
          if nDp > 0  //tem DP
             nMensalidadeNova := nMensalidade * (nDp * 0.15 + 1)
             cMensalidade     := 'A mensalidade era de R$'+ AllTrim(Transform(nMensalidade,'@E 999,999.99')) + ',para R$'+ AllTrim(Transform(nMensalidadeNova,'@E 999,999.99'))
@@ -392,11 +390,9 @@ do while !lSair
             if nDp < 2  //quantas
                cResultado := 'O aluno ' + AllTrim(cNome) + ' foi APROVADO com '+ Transform(nDp,'9') +' DEPENDENCIA em ' + cMateriasDP
             else
-               cResultado := 'O aluno ' + AllTrim(cNome) + ' foi REPROVADO,pois ficou com '+ AllTrim(Transform(nDp,'9')) +' DEPENDENCIAS em ' + cMateriasDP
+               cResultado := 'O aluno ' + AllTrim(cNome) + ' foi REPROVADO com '+ AllTrim(Transform(nDp,'9')) +' DEPENDENCIAS em ' + cMateriasDP
             endif
 
-         else        //Sem DP
-            cMensalidade := 'Mensalidade continua a mesma R$'+ AllTrim(Transform(nMensalidade,'@E 999,999.99'))
          endif
 
       //Sem Bolsa
@@ -407,7 +403,7 @@ do while !lSair
             if nDp < 3  //quantas
                cResultado += 'O aluno ' + AllTrim(cNome) + ' foi APROVADO com '+ Transform(nDp,'9') +' DEPENDENCIA em ' + cMateriasDP
             else
-               cResultado += 'O aluno ' + AllTrim(cNome) + ' foi REPROVADO,pois ficou com '+ AllTrim(Transform(nDp,'9')) +' DEPENDENCIAS em ' + cMateriasDP
+               cResultado += 'O aluno ' + AllTrim(cNome) + ' foi REPROVADO com '+ AllTrim(Transform(nDp,'9')) +' DEPENDENCIAS em ' + cMateriasDP
             endif
          else        //Sem DP
             cMensalidade := 'Mensalidade continua a mesma R$'+ AllTrim(Transform(nMensalidade,'@E 999,999.99'))

@@ -6,6 +6,7 @@ set scoreboard off
 setmode(25,80)
 lSair := .f.
 dHoje := Date()
+
 do while !lSair
 
    cNome        := Space(30)
@@ -138,7 +139,7 @@ do while !lSair
 
       read
       if LastKey() == 27
-         nOpcao := alert('Deseja sair do programa?' , { 'Sim' , 'Voltar ao come‡o' ,'Continuar digitando' })
+         nOpcao := alert('Deseja sair do programa?' , { 'Sim' , 'Digitar outro Aluno' ,'Continuar digitando' })
          if nOpcao = 1
             lSair := .t.
             exit
@@ -182,17 +183,15 @@ do while !lSair
       endif
 
 //----------------------------------
-      cResultado := 'O aluno ' + AllTrim(cNome) +' '
-      if nDp == 0
-         cResultado   += 'foi APROVADO em todas as materias!'
-         cMensalidade := 'Mensalidade continua a mesma R$'+ AllTrim(Transform(nMensalidade,'@E 999,999.99'))
-      else
+      cResultado   := 'O aluno ' + AllTrim(cNome) + ' foi APROVADO em todas as materias!'
+      cMensalidade := 'Mensalidade continua a mesma R$'+ AllTrim(Transform(nMensalidade,'@E 999,999.99'))
+      if nDp > 0
          nMensalidadeNova := nMensalidade * (nDp * 0.15 + 1)
          cMensalidade     := 'A mensalidade era de R$'+ AllTrim(Transform(nMensalidade,'@E 999,999.99')) + ',para R$'+ AllTrim(Transform(nMensalidadeNova,'@E 999,999.99'))
          if nDp < 3
-            cResultado += 'foi APROVADO com '+ Transform(nDp,'9') +' DEPENDENCIAS em ' + cMateriasDP
+            cResultado :=  'O aluno ' + AllTrim(cNome) + ' foi APROVADO com '+ Transform(nDp,'9') +' DEPENDENCIAS em ' + cMateriasDP
          else
-            cResultado += 'foi REPROVADO,pois ficou com '+ AllTrim(Transform(nDp,'9')) +' DEPENDENCIAS em ' + cMateriasDP
+            cResultado :=  'O aluno ' + AllTrim(cNome) + ' foi REPROVADO com '+ AllTrim(Transform(nDp,'9')) +' DEPENDENCIAS em ' + cMateriasDP
          endif
       endif
 
@@ -210,13 +209,7 @@ do while !lSair
       @ ++nLinha,10 say cMensalidade
 
       InKey(0)
-      nOpcao := alert('Deseja sair do programa?' , { 'Sim' , 'Nao' })
-      if nOpcao = 1
-         lSair := .t.
-         exit
-      else
-         exit
-      endif
+      exit
    enddo
 enddo
 @ 23,01 say ''

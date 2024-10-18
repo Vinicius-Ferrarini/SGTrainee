@@ -181,7 +181,7 @@ do while !lSair
          nDigitadoQuantidade := 0
          nDigitadoDesconto   := 0
          @ nLinha,11 say AllTrim(cTempDescricao)
-         @ nLinha,38 say AllTrim(Transform(nTempEstoque,'@E999.999'))
+         @ nLinha,38 say AllTrim(Transform(nTempEstoque,'@E 999.999'))
          @ nLinha,52 say '%'
          @ nLinha,60 say AllTrim(Transform(nTempPreco,'@E9.99'))
 
@@ -240,16 +240,38 @@ do while !lSair
       endif
 
       //faturar venda
-      nEstoqueBatata := nTempEstoqueBatata
-      nEstoquePera   := nTempEstoquePera
-      nEstoqueBanana := nTempEstoqueBanana
-      nTotalCompra   += nEntrega
-      nContador++
+      do while .t.
+         nTotalCompra    += nEntrega
+         cFormaPagamento := ' '
+         @ --nLinhaPadrao,00 clear to 24,79
+         @ ++nLinhaPadrao,25 say 'Valor da Compra de R$'+ AllTrim(Transform(nTotalCompra,'@E 9,999.99'))
+         @ ++nLinhaPadrao,25 say 'Forma de pagamento [ ] [D]inheiro [C]artao'
 
-      @ --nLinhaPadrao,00 clear to 24,79
-      @ ++nLinhaPadrao,25 say 'Valor da Compra de R$'+ AllTrim(Transform(nTotalCompra,'@E 9,999.99'))
-      @ ++nLinhaPadrao,25 say 'Venda realizada com sucesso!!'
-      InKey(0)
+         @ nLinhaPadrao,46 get cFormaPagamento valid cFormaPagamento $ 'DC' picture '@!'
+         read
+         if LastKey() == 27
+            nOpcao := Alert('Oque deseja fazer?' , { 'Cancelar Venda' , 'Continuar Digitando' })
+            if nOpcao == 1
+               exit
+            else
+               nTotalCompra -= nEntrega
+               loop
+            endif
+         endif
+         nEstoqueBatata := nTempEstoqueBatata
+         nEstoquePera   := nTempEstoquePera
+         nEstoqueBanana := nTempEstoqueBanana
+         nContador++
+
+         @ ++nLinhaPadrao,25 say 'Venda realizada com sucesso!!'
+         InKey(0)
+         exit
+      enddo
+
+
+
+
+
    enddo
 enddo
 
