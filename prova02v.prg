@@ -6,28 +6,28 @@ set scoreboard off
 
 dHoje     := date()
 lSair     := .f.
-nContador := 0
+nContador := 1
 
 //Banana
 nCodigoBanana          := 1500
 nMaximoDescontoBanana  := 20
 cDescricaoBanana       := 'Banana Prata'
 nPrecoBanana           := 1.50
-nEstoqueBanana         := 155.00
+nEstoqueBanana         := 155.000
 
 //Pera
 nCodigoPera            := 2501
 nMaximoDescontoPera    := 15
 cDescricaoPera         := 'Pera Argentina'
 nPrecoPera             := 9.00
-nEstoquePera           := 117.50
+nEstoquePera           := 117.500
 
 //Batata
 nCodigoBatata          := 3001
 nMaximoDescontoBatata  := 10
 cDescricaoBatata       := 'Batata Peruana'
 nPrecoBatata           := 5.00
-nEstoqueBatata         := 859.00
+nEstoqueBatata         := 859.000
 
 do while !lSair
 
@@ -51,18 +51,21 @@ do while !lSair
       endif
    endif
 
-   if !(AllTrim(cUsuario) $ 'ADMIN') .or. !(AllTrim(cSenha) $ 'teste123')
+   if !( 'ADMIN' $ AllTrim(cUsuario)) .or. !('teste123' $ AllTrim(cSenha))
       Alert('Dados Incorretos!',{'Ok'})
       loop
    endif
+   @ 01,35 say '********'
+   @ 02,35 say '********'
 
    nOpcao := 0
-   @ 04,01 prompt 'Efetuar pedidos'
-   @ 05,01 prompt 'Deslogar'
+   @ 04,30 prompt 'Efetuar pedidos'
+   @ 05,30 prompt 'Deslogar'
    menu to nOpcao
    if nOpcao = 2
       loop
    endif
+
 //----------------cadastro
    do while !lSair
       @ 04,00 clear to 24,79
@@ -79,7 +82,7 @@ do while !lSair
       @ 05,40 say 'Entrega [ ] [S] [N]'
 
       @ 04,12 get cNome    valid !Empty(AllTrim(cNome))
-      @ 04,51 get nLimie   valid nLimie > 0              picture '@E 99,999.99'
+      @ 04,51 get nLimie   valid nLimie > 0              picture '@E 9,999.99'
       @ 05,12 get dVenda   valid dVenda >= dHoje
       @ 05,49 get cEntrega valid cEntrega $ 'SN'         picture '@!'
       read
@@ -120,39 +123,50 @@ do while !lSair
             endif
          endif
       endif
-//Codigo | Descricao Prod | QTD | Estoque | Desconto | Preco Un | Total Item '
-      @ nLinhaPadrao++,02 say 'Codigo | Descricao Prod | QTD | Estoque | Desconto | Preco Un | Total Item '
+
+      @ nLinhaPadrao++,02 say 'Codigo | Descricao Prod | Quanti | Estoque | Desconto | Preco Un | Total Item '
       nLinha := nLinhaPadrao
       nTempEstoqueBanana := nEstoqueBanana
       nTempEstoquePera   := nEstoquePera
       nTempEstoqueBatata := nEstoqueBatata
       nTotalCompra       := 0
       nTotalParcial      := 0
+      lCupom             := .f.
       //Vendas
       do while .t.
          nCodigoDigitado := 0
          @ nLinha,03 get nCodigoDigitado valid nCodigoDigitado > 0 picture '9999'
          read
          if LastKey() == 27
-            nOpcao := Alert('Oque deseja fazer?' , { 'Faturar venda' , 'Continuar Digitando', 'Cancelar Venda' })
-            if nOpcao = 2
-               loop
-            else
+            nOpcao := Alert('Oque deseja fazer?' , { 'Faturar venda' , 'Cancelar Venda' , 'Continuar Digitando' })
+
+            if nOpcao == 1
+               if nTotalCompra == 0
+                  alert('Nao e possivel faturar SEM PRODUTO!',{'ok'})
+                  loop
+               endif
+               lCupom := .t.
                exit
+
+            elseif nOpcao == 2
+               exit
+            else
+               loop
             endif
          endif
 
+         //verifica produto
          if nCodigoDigitado == nCodigoBanana
             cTempDescricao   := cDescricaoBanana
             nTempMaxDesconto := nMaximoDescontoBanana
             nTempPreco       := nPrecoBanana
-            nTempEstoque    := nTempEstoqueBanana
+            nTempEstoque     := nTempEstoqueBanana
 
          elseif nCodigoDigitado == nCodigoPera
             cTempDescricao   := cDescricaoPera
             nTempMaxDesconto := nMaximoDescontoPera
             nTempPreco       := nPrecoPera
-            nTempEstoque    := nTempEstoquePera
+            nTempEstoque     := nTempEstoquePera
 
          elseif nCodigoDigitado == nCodigoBatata
             cTempDescricao   := cDescricaoBatata
@@ -167,30 +181,75 @@ do while !lSair
          nDigitadoQuantidade := 0
          nDigitadoDesconto   := 0
          @ nLinha,11 say AllTrim(cTempDescricao)
-         @ nLinha,34 say AllTrim(Str(nTempEstoque))
-         @ nLinha,49 say '%'
-         @ nLinha,57 say AllTrim(Transform(nTempPreco,'@E9.99'))
+         @ nLinha,38 say AllTrim(Transform(nTempEstoque,'@E999.999'))
+         @ nLinha,52 say '%'
+         @ nLinha,60 say AllTrim(Transform(nTempPreco,'@E9.99'))
 
 
-         @ nLinha,28 get nDigitadoQuantidade valid nDigitadoQuantidade > 0 .and. nDigitadoQuantidade <= nTempEstoque     picture '999'
-         @ nLinha,47 get nDigitadoDesconto   valid nDigitadoDesconto  >= 0 .and. nDigitadoDesconto   <= nTempMaxDesconto picture '99'
+         @ nLinha,28 get nDigitadoQuantidade valid nDigitadoQuantidade > 0  picture '@E 999.999'
+         @ nLinha,50 get nDigitadoDesconto   valid nDigitadoDesconto  >= 0  picture '99'
          read
          if LastKey() == 27
             loop
          endif
-         nTotalParcial := nTempPreco * nDigitadoQuantidade * (100 - nDigitadoDesconto * 0.01)
+
+         if nDigitadoQuantidade > nTempEstoque
+            alert('Quantidade digitada MAIOR que estoque!',{'ok'})
+            @ nLinha,00 clear to nLinha,79
+            loop
+         endif
+         if nDigitadoDesconto > nTempMaxDesconto
+            alert('Desconto MAIOR que permitido!',{'ok'})
+            @ nLinha,00 clear to nLinha,79
+            loop
+         endif
+
+         //valor venda
+         nTotalParcial := nTempPreco * nDigitadoQuantidade * 0.01 * (100 - nDigitadoDesconto)
+
+         if nTotalParcial > nLimie
+            alert('Valor da compra Maior que limite do cliente!', {'ok'})
+            @ nLinha,00 clear to nLinha,79
+            loop
+         endif
          nTotalCompra  += nTotalParcial
 
-         @ nLinha,69 say Transform(nTotalParcial ,'@E 99.999,99')
-         @ 23    ,69 say Transform(nTotalCompra , '@E 99.999,99')
+         //baixa estoque temp
+         if nCodigoDigitado == nCodigoBanana
+            nTempEstoqueBanana -= nDigitadoQuantidade
+         elseif nCodigoDigitado == nCodigoPera
+            nTempEstoquePera -= nDigitadoQuantidade
+         else
+            nTempEstoqueBatata -= nDigitadoQuantidade
+         endif
 
+
+         @ nLinha,70 say Transform(nTotalParcial ,'@E 9,999.99')
+         @ 23    ,70 say Transform(nTotalCompra  ,'@E 9,999.99')
+
+         //calcula linha
          nLinha++
          if nLinha = 22
             @ nLinhaPadrao,00 clear to 21,79
             nLinha := nLinhaPadrao
          endif
-         InKey(0)
       enddo
+
+      if !lCupom //cancela venda
+         loop
+      endif
+
+      //faturar venda
+      nEstoqueBatata := nTempEstoqueBatata
+      nEstoquePera   := nTempEstoquePera
+      nEstoqueBanana := nTempEstoqueBanana
+      nTotalCompra   += nEntrega
+      nContador++
+
+      @ --nLinhaPadrao,00 clear to 24,79
+      @ ++nLinhaPadrao,25 say 'Valor da Compra de R$'+ AllTrim(Transform(nTotalCompra,'@E 9,999.99'))
+      @ ++nLinhaPadrao,25 say 'Venda realizada com sucesso!!'
+      InKey(0)
    enddo
 enddo
 
