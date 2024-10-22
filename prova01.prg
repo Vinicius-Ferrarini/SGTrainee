@@ -84,7 +84,7 @@ do while !lSair
       nFaltaD4 := 0
 
       nLinha := 4
-      @ nLinha++,10 say '| Materias |  1øB  |  2øB  |  3øB  |  4øB  | Media |'
+      @ nLinha++,10 say '| Materias |  1ï¿½B  |  2ï¿½B  |  3ï¿½B  |  4ï¿½B  | Media |'
       @ nLinha++,10 say '|          | N  |F | N  |F | N  |F | N  |F | N  |F | '
       @ nLinha++,10 say '|          |    |  |    |  |    |  |    |  |    |  |'
       @ nLinha++,10 say '|          |    |  |    |  |    |  |    |  |    |  |'
@@ -143,17 +143,17 @@ do while !lSair
          if nOpcao = 1
             lSair := .t.
             exit
-         elseif nOpcao = 2  //come‡o
+         elseif nOpcao = 2  //comeï¿½o
             exit
          else
             loop
          endif
       endif
    //Soma
-      nFinalNotaA :=(nNotaA1 + nNotaA2 + nNotaA3 + nNotaA4) /4
-      nFinalNotaB :=(nNotaB1 + nNotaB2 + nNotaB3 + nNotaB4) /4
-      nFinalNotaC :=(nNotaC1 + nNotaC2 + nNotaC3 + nNotaC4) /4
-      nFinalNotaD :=(nNotaD1 + nNotaD2 + nNotaD3 + nNotaD4) /4
+      nMediaNotaA :=(nNotaA1 + nNotaA2 + nNotaA3 + nNotaA4) /4
+      nMediaNotaB :=(nNotaB1 + nNotaB2 + nNotaB3 + nNotaB4) /4
+      nMediaNotaC :=(nNotaC1 + nNotaC2 + nNotaC3 + nNotaC4) /4
+      nMediaNotaD :=(nNotaD1 + nNotaD2 + nNotaD3 + nNotaD4) /4
 
       nTotalFaltaA := nFaltaA1 + nFaltaA2 + nFaltaA3 + nFaltaA4
       nTotalFaltaB := nFaltaB1 + nFaltaB2 + nFaltaB3 + nFaltaB4
@@ -162,22 +162,22 @@ do while !lSair
       nDp := 0
       cMateriasDP := ''
 
-      if nFinalNotaA < 6 .or. nTotalFaltaA > 48
+      if nMediaNotaA < 6 .or. nTotalFaltaA > 48
          nDp++
          cMateriasDP += ' ' + AllTrim(cMateriaA)
       endif
 
-      if nFinalNotaB < 6 .or. nTotalFaltaB > 48
+      if nMediaNotaB < 6 .or. nTotalFaltaB > 48
          nDp++
          cMateriasDP += ' ' + AllTrim(cMateriaB)
       endif
 
-      if nFinalNotaC < 6 .or. nTotalFaltaC > 48
+      if nMediaNotaC < 6 .or. nTotalFaltaC > 48
          nDp++
          cMateriasDP += ' ' + AllTrim(cMateriaC)
       endif
 
-      if nFinalNotaD < 6 .or. nTotalFaltaD > 48
+      if nMediaNotaD < 6 .or. nTotalFaltaD > 48
          nDp++
          cMateriasDP += ' ' + AllTrim(cMateriaD)
       endif
@@ -195,16 +195,12 @@ do while !lSair
          endif
       endif
 
-     //print FInal
+     //print Media
       nLinha := 6
-      @ nLinha,  54 say Transform(nFinalNotaA,'@E 99.9')
-      @ nLinha++,59 say Transform(nTotalFaltaA,'99')
-      @ nLinha,  54 say Transform(nFinalNotaB,'@E 99.9')
-      @ nLinha++,59 say Transform(nTotalFaltaB,'99')
-      @ nLinha,  54 say Transform(nFinalNotaC,'@E 99.9')
-      @ nLinha++,59 say Transform(nTotalFaltaC,'99')
-      @ nLinha,  54 say Transform(nFinalNotaD,'@E 99.9')
-      @ nLinha++,59 say Transform(nTotalFaltaD,'99')
+      @ nLinha++,54 say Transform(nMediaNotaA,'@E 99.9') + '|' + Transform(nTotalFaltaA,'99')
+      @ nLinha++,54 say Transform(nMediaNotaB,'@E 99.9') + '|' + Transform(nTotalFaltaB,'99') 
+      @ nLinha++,54 say Transform(nMediaNotaC,'@E 99.9') + '|' + Transform(nTotalFaltaC,'99') 
+      @ nLinha++,54 say Transform(nMediaNotaD,'@E 99.9') + '|' + Transform(nTotalFaltaD,'99') 
       @ ++nLinha,10 say cResultado
       @ ++nLinha,10 say cMensalidade
 

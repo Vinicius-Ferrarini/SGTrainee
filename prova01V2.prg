@@ -158,10 +158,10 @@ do while !lSair
          endif
       endif
       //Soma
-      nFinalNotaA := (nNotaA1 + nNotaA2 + nNotaA3 + nNotaA4) /4
-      nFinalNotaB := (nNotaB1 + nNotaB2 + nNotaB3 + nNotaB4) /4
-      nFinalNotaC := (nNotaC1 + nNotaC2 + nNotaC3 + nNotaC4) /4
-      nFinalNotaD := (nNotaD1 + nNotaD2 + nNotaD3 + nNotaD4) /4
+      nMediaNotaA := (nNotaA1 + nNotaA2 + nNotaA3 + nNotaA4) /4
+      nMediaNotaB := (nNotaB1 + nNotaB2 + nNotaB3 + nNotaB4) /4
+      nMediaNotaC := (nNotaC1 + nNotaC2 + nNotaC3 + nNotaC4) /4
+      nMediaNotaD := (nNotaD1 + nNotaD2 + nNotaD3 + nNotaD4) /4
 
       nTotalFaltaA := nFaltaA1 + nFaltaA2 + nFaltaA3 + nFaltaA4
       nTotalFaltaB := nFaltaB1 + nFaltaB2 + nFaltaB3 + nFaltaB4
@@ -171,7 +171,7 @@ do while !lSair
       cMateriasDP := ''
 
       //A
-      if nFinalNotaA < 6 .or. nTotalFaltaA > 56
+      if nMediaNotaA < 6 .or. nTotalFaltaA > 56
          //reprova
          nDp++
          cColorA := 'W/R'
@@ -220,7 +220,7 @@ do while !lSair
       endif
 
       //B
-      if nFinalNotaB < 6 .or. nTotalFaltaB > 56
+      if nMediaNotaB < 6 .or. nTotalFaltaB > 56
          //reprova
          nDp++
          cColorB := 'W/R'
@@ -269,7 +269,7 @@ do while !lSair
       endif
 
       //C
-      if nFinalNotaC < 6 .or. nTotalFaltaC > 56
+      if nMediaNotaC < 6 .or. nTotalFaltaC > 56
          //reprova
          nDp++
          cColorC := 'W/R'
@@ -317,7 +317,7 @@ do while !lSair
 
       endif
 //D
-      if nFinalNotaD < 6 .or. nTotalFaltaD > 56
+      if nMediaNotaD < 6 .or. nTotalFaltaD > 56
          //reprova
          nDp++
          cColorD := 'W/R'
@@ -410,12 +410,12 @@ do while !lSair
          endif
       endif
 
-     //Print Final
+     //Print Media
       nLinha := 7
-      @ nLinha++,54 say Transform(nFinalNotaA,'@E 99.9') + '|' + Transform(nTotalFaltaA,'99') color(cColorA)
-      @ nLinha++,54 say Transform(nFinalNotaB,'@E 99.9') + '|' + Transform(nTotalFaltaB,'99') color(cColorB)
-      @ nLinha++,54 say Transform(nFinalNotaC,'@E 99.9') + '|' + Transform(nTotalFaltaC,'99') color(cColorC)
-      @ nLinha++,54 say Transform(nFinalNotaD,'@E 99.9') + '|' + Transform(nTotalFaltaD,'99') color(cColorD)
+      @ nLinha++,54 say Transform(nMediaNotaA,'@E 99.9') + '|' + Transform(nTotalFaltaA,'99') color(cColorA)
+      @ nLinha++,54 say Transform(nMediaNotaB,'@E 99.9') + '|' + Transform(nTotalFaltaB,'99') color(cColorB)
+      @ nLinha++,54 say Transform(nMediaNotaC,'@E 99.9') + '|' + Transform(nTotalFaltaC,'99') color(cColorC)
+      @ nLinha++,54 say Transform(nMediaNotaD,'@E 99.9') + '|' + Transform(nTotalFaltaD,'99') color(cColorD)
       @ 20,01 say cResultado
       @ 21,01 say cMensalidade
 
