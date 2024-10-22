@@ -1,9 +1,9 @@
-
 //vinicius reginaldo ferrarini
 SetColor ('0/W')
 set date to british
 set epoch to 1940
 set scoreboard off
+setmode(25,80)
 
 dDataHoje    := date()
 nDiaAtual    := Day(dDataHoje)
@@ -41,7 +41,7 @@ do while .t.
    nMesNascimento    := Month(dDataNascimento)
    nAnoNascimento    := Year(dDataNascimento)
    nSemanaNascimento := DoW(dDataNascimento)
-
+   lFezAniversario := .f.
 //Nascimento Extenso
 
    //mes nascimento
@@ -118,7 +118,6 @@ do while .t.
 //-------------------------
 
 //Calcula idade
-   lFezAniversario := .t.
    nAnoIdade := nAnoAtual - nAnoNascimento
    nMesIdade := nMesAtual - nMesNascimento
    if nMesAtual < nMesNascimento .or. nMesAtual == nMesNascimento .and. nDiaAtual < nDiaNascimento

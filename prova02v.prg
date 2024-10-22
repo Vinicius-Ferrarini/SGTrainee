@@ -3,6 +3,7 @@
 set date to british
 set epoch to 1940
 set scoreboard off
+setmode(25,80)
 
 dHoje     := date()
 lSair     := .f.
@@ -134,12 +135,15 @@ do while !lSair
       lCupom             := .f.
       //Vendas
       do while .t.
-         nCodigoDigitado := 0
+         nCodigoDigitado     := 0
+         nDigitadoQuantidade := 0
+         nDigitadoDesconto   := 0
+
          @ nLinha,03 get nCodigoDigitado valid nCodigoDigitado > 0 picture '9999'
          read
          if LastKey() == 27
             nOpcao := Alert('Oque deseja fazer?' , { 'Faturar venda' , 'Cancelar Venda' , 'Continuar Digitando' })
-
+            
             if nOpcao == 1
                if nTotalCompra == 0
                   alert('Nao e possivel faturar SEM PRODUTO!',{'ok'})
@@ -178,8 +182,6 @@ do while !lSair
             loop
          endif
 
-         nDigitadoQuantidade := 0
-         nDigitadoDesconto   := 0
          @ nLinha,11 say AllTrim(cTempDescricao)
          @ nLinha,38 say AllTrim(Transform(nTempEstoque,'@E 999.999'))
          @ nLinha,52 say '%'

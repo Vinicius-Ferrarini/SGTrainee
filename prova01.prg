@@ -159,7 +159,7 @@ do while !lSair
       nTotalFaltaB := nFaltaB1 + nFaltaB2 + nFaltaB3 + nFaltaB4
       nTotalFaltaC := nFaltaC1 + nFaltaC2 + nFaltaC3 + nFaltaC4
       nTotalFaltaD := nFaltaD1 + nFaltaD2 + nFaltaD3 + nFaltaD4
-      nDp := 0
+      nDp         := 0
       cMateriasDP := ''
 
       if nMediaNotaA < 6 .or. nTotalFaltaA > 48
@@ -189,9 +189,9 @@ do while !lSair
          nMensalidadeNova := nMensalidade * (nDp * 0.15 + 1)
          cMensalidade     := 'A mensalidade era de R$'+ AllTrim(Transform(nMensalidade,'@E 999,999.99')) + ',para R$'+ AllTrim(Transform(nMensalidadeNova,'@E 999,999.99'))
          if nDp < 3
-            cResultado :=  'O aluno ' + AllTrim(cNome) + ' foi APROVADO com '+ Transform(nDp,'9') +' DEPENDENCIAS em ' + cMateriasDP
+            cResultado :=  'O aluno ' + AllTrim(cNome) + ' foi APROVADO com '+ Transform(nDp,'9') + ' DEPENDENCIAS em ' + cMateriasDP
          else
-            cResultado :=  'O aluno ' + AllTrim(cNome) + ' foi REPROVADO com '+ AllTrim(Transform(nDp,'9')) +' DEPENDENCIAS em ' + cMateriasDP
+            cResultado :=  'O aluno ' + AllTrim(cNome) + ' foi REPROVADO com '+ Transform(nDp,'9') + ' DEPENDENCIAS em ' + cMateriasDP
          endif
       endif
 
