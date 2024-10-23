@@ -91,8 +91,11 @@ do while !lSair
       cColorC := 'W/G'
       cColorD := 'W/G'
 
+      nDp         := 0
+      cMateriasDP := ''
+
       nLinha := 5
-      @ nLinha++,10 say '| Materias |  1øB  |  2øB  |  3øB  |  4øB  | Media |'
+      @ nLinha++,10 say '| Materias |  1ï¿½B  |  2ï¿½B  |  3ï¿½B  |  4ï¿½B  | Media |'
       @ nLinha++,10 say '|          | N  |F | N  |F | N  |F | N  |F | N  |F | '
       @ nLinha++,10 say '|          |    |  |    |  |    |  |    |  |    |  |'
       @ nLinha++,10 say '|          |    |  |    |  |    |  |    |  |    |  |'
@@ -147,11 +150,11 @@ do while !lSair
 
       read
       if LastKey() == 27
-         nOpcao := alert('Deseja sair do programa?' , { 'Sim' , 'Voltar ao come‡o' ,'Continuar digitando' })
+         nOpcao := alert('Deseja sair do programa?' , { 'Sim' , 'Voltar ao comeï¿½o' ,'Continuar digitando' })
          if nOpcao = 1
             lSair := .t.
             exit
-         elseif nOpcao = 2  //come‡o
+         elseif nOpcao = 2  //comeï¿½o
             exit
          else
             loop
@@ -167,8 +170,6 @@ do while !lSair
       nTotalFaltaB := nFaltaB1 + nFaltaB2 + nFaltaB3 + nFaltaB4
       nTotalFaltaC := nFaltaC1 + nFaltaC2 + nFaltaC3 + nFaltaC4
       nTotalFaltaD := nFaltaD1 + nFaltaD2 + nFaltaD3 + nFaltaD4
-      nDp := 0
-      cMateriasDP := ''
 
       //A
       if nMediaNotaA < 6 .or. nTotalFaltaA > 56
@@ -182,13 +183,14 @@ do while !lSair
          cEscolha1 := ' '
          cEscolha2 := ' '
          cEscolha3 := ' '
+         nPassou   := 0
          @ 13,01 say 'Deseja passar ' + AllTrim(cNome) + ' em ' + AllTrim(cMateriaA) +'?(S/N)'
          @ 14,01 get cEscolha1 valid cEscolha1 $ 'SN' picture '@!'
          @ 15,01 get cEscolha2 valid cEscolha2 $ 'SN' picture '@!'
          @ 16,01 get cEscolha3 valid cEscolha3 $ 'SN' picture '@!'
          read
          if LastKey() == 27
-            nOpcao := alert('Deseja sair do programa?' , { 'Sim' , 'Voltar ao come‡o' ,'Continuar digitando' })
+            nOpcao := alert('Deseja sair do programa?' , { 'Sim' , 'Voltar ao comeï¿½o' ,'Continuar digitando' })
             if nOpcao = 1
                lSair := .t.
                exit
@@ -199,7 +201,6 @@ do while !lSair
             endif
          endif
 
-         nPassou := 0
          if cEscolha1 = 'S'
             nPassou++
          endif
@@ -231,13 +232,14 @@ do while !lSair
          cEscolha1 := ' '
          cEscolha2 := ' '
          cEscolha3 := ' '
+         nPassou   := 0
          @ 13,01 say 'Deseja passar ' + AllTrim(cNome) + ' em ' + AllTrim(cMateriaB) +'?(S/N)'
          @ 14,20 get cEscolha1 valid cEscolha1 $ 'SN' picture '@!'
          @ 15,20 get cEscolha2 valid cEscolha2 $ 'SN' picture '@!'
          @ 16,20 get cEscolha3 valid cEscolha3 $ 'SN' picture '@!'
          read
          if LastKey() == 27
-            nOpcao := alert('Deseja sair do programa?' , { 'Sim' , 'Voltar ao come‡o' ,'Continuar digitando' })
+            nOpcao := alert('Deseja sair do programa?' , { 'Sim' , 'Voltar ao comeï¿½o' ,'Continuar digitando' })
             if nOpcao = 1
                lSair := .t.
                exit
@@ -248,7 +250,7 @@ do while !lSair
             endif
          endif
 
-         nPassou := 0
+
          if cEscolha1 = 'S'
             nPassou++
          endif
@@ -280,13 +282,14 @@ do while !lSair
          cEscolha1 := ' '
          cEscolha2 := ' '
          cEscolha3 := ' '
+         nPassou   := 0
          @ 13,01 say 'Deseja passar ' + AllTrim(cNome) + ' em ' + AllTrim(cMateriaC) +'?(S/N)'
          @ 14,40 get cEscolha1 valid cEscolha1 $ 'SN' picture '@!'
          @ 15,40 get cEscolha2 valid cEscolha2 $ 'SN' picture '@!'
          @ 16,40 get cEscolha3 valid cEscolha3 $ 'SN' picture '@!'
          read
          if LastKey() == 27
-            nOpcao := alert('Deseja sair do programa?' , { 'Sim' , 'Voltar ao come‡o' ,'Continuar digitando' })
+            nOpcao := alert('Deseja sair do programa?' , { 'Sim' , 'Voltar ao comeï¿½o' ,'Continuar digitando' })
             if nOpcao = 1
                lSair := .t.
                exit
@@ -297,7 +300,7 @@ do while !lSair
             endif
          endif
 
-         nPassou := 0
+
          if cEscolha1 = 'S'
             nPassou++
          endif
@@ -328,13 +331,14 @@ do while !lSair
          cEscolha1 := ' '
          cEscolha2 := ' '
          cEscolha3 := ' '
+         nPassou   := 0
          @ 13,01 say 'Deseja passar ' + AllTrim(cNome) + ' em ' + AllTrim(cMateriaD) +'?(S/N)'
          @ 14,60 get cEscolha1 valid cEscolha1 $ 'SN' picture '@!'
          @ 15,60 get cEscolha2 valid cEscolha2 $ 'SN' picture '@!'
          @ 16,60 get cEscolha3 valid cEscolha3 $ 'SN' picture '@!'
          read
          if LastKey() == 27
-            nOpcao := alert('Deseja sair do programa?' , { 'Sim' , 'Voltar ao come‡o' ,'Continuar digitando' })
+            nOpcao := alert('Deseja sair do programa?' , { 'Sim' , 'Voltar ao comeï¿½o' ,'Continuar digitando' })
             if nOpcao = 1
                lSair := .t.
                exit
@@ -345,7 +349,7 @@ do while !lSair
             endif
          endif
 
-         nPassou := 0
+
          if cEscolha1 = 'S'
             nPassou++
          endif

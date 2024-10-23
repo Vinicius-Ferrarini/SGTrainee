@@ -41,7 +41,7 @@ do while !lSair
    @ 02,29 say 'Senha:'
 
    @ 01,35 get cUsuario valid !Empty(AllTrim(cUsuario)) picture '@!'
-   @ 02,35 get cSenha   valid !Empty(AllTrim(cSenha))
+   @ 02,35 get cSenha   valid !Empty(AllTrim(cSenha))  color('w/w')
    read
    if LastKey() == 27
       nOpcao := alert('Deseja sair do programa?' , { 'Sim' , 'Nao' })
@@ -56,8 +56,7 @@ do while !lSair
       Alert('Dados Incorretos!',{'Ok'})
       loop
    endif
-   @ 01,35 say '********'
-   @ 02,35 say '********'
+
 
    nOpcao := 0
    @ 04,30 prompt 'Efetuar pedidos'

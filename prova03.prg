@@ -26,7 +26,7 @@ do while .t.
    @ 08,00 say 'Prox. Aniversario em uma:'
 
    @ 01,26 get cNome           valid !Empty(cNome)                 picture '@!'
-   @ 02,26 get dDataNascimento valid dDataNascimento <= dDataHoje
+   @ 02,26 get dDataNascimento valid !Empty(dDataNascimento) .and. dDataNascimento <= dDataHoje
    read
    if LastKey() == 27
       nOpcao := alert('Deseja sair do programa?' , { 'Sim' , 'Nao' })
@@ -120,7 +120,7 @@ do while .t.
 //Calcula idade
    nAnoIdade := nAnoAtual - nAnoNascimento
    nMesIdade := nMesAtual - nMesNascimento
-   if nMesAtual < nMesNascimento .or. nMesAtual == nMesNascimento .and. nDiaAtual < nDiaNascimento
+   if nMesAtual < nMesNascimento .or. (nMesAtual == nMesNascimento .and. nDiaAtual < nDiaNascimento)
       nAnoIdade--
       nMesIdade += 12
       lFezAniversario := .t.

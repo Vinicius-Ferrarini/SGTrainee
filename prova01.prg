@@ -30,9 +30,9 @@ do while !lSair
    @ nLinha  ,13 get cNome        valid !Empty(AllTrim(cNome))
    @ nLinha++,65 get dNascimento  valid !Empty(dNascimento) .and. dNascimento <= dHoje
    @ nLinha  ,13 get cCurso       valid !Empty(AllTrim(cCurso))
-   @ nLinha++,65 get nSerie       valid nSerie > 0                                    picture '99'
+   @ nLinha++,65 get nSerie       valid nSerie > 0 .and. nSerie < 8                   picture '9'
    @ nLinha  ,13 get nAnoLetivo   valid nAnoLetivo > 0                                picture '9999'
-   @ nLinha++,65 get nMensalidade valid nMensalidade > 0                              picture '@E 999,999.99'
+   @ nLinha  ,65 get nMensalidade valid nMensalidade > 0                              picture '@E 999,999.99'
    read
    if LastKey() == 27
       nOpcao := alert('Deseja sair do programa?' , { 'Sim' , 'Nao' })
@@ -159,8 +159,8 @@ do while !lSair
       nTotalFaltaB := nFaltaB1 + nFaltaB2 + nFaltaB3 + nFaltaB4
       nTotalFaltaC := nFaltaC1 + nFaltaC2 + nFaltaC3 + nFaltaC4
       nTotalFaltaD := nFaltaD1 + nFaltaD2 + nFaltaD3 + nFaltaD4
-      nDp         := 0
-      cMateriasDP := ''
+      nDp          := 0
+      cMateriasDP  := ''
 
       if nMediaNotaA < 6 .or. nTotalFaltaA > 48
          nDp++
