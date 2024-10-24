@@ -147,7 +147,6 @@ do while !lSair
       @ nLinha++,51 get nFaltaC4 valid nFaltaC4 >= 0                     picture '99'
       @ nLinha  ,46 get nNotaD4  valid nNotaD4 >= 0 .and. nNotaD4 <= 10  picture '@E 99.9'
       @ nLinha  ,51 get nFaltaD4 valid nFaltaD4 >= 0                     picture '99'
-
       read
       if LastKey() == 27
          nOpcao := alert('Deseja sair do programa?' , { 'Sim' , 'Voltar ao come�o' ,'Continuar digitando' })
@@ -177,6 +176,16 @@ do while !lSair
          nDp++
          cColorA := 'W/R'
          cMateriasDP += ' ' + AllTrim(cMateriaA)
+         cMotivoA    := 'Reprova por'
+         
+         if nMediaNotaA < 6
+            cMotivoA += ' Nota'
+            if nTotalFaltaA > 48
+               cMotivoA += ' e Falta'        
+            endif
+         else
+            cMotivoA += ' Falta'
+         endif
 
       elseif nTotalFaltaA > 47
          //conselho
@@ -216,6 +225,9 @@ do while !lSair
             nDp++
             cColorA := 'W/R'
             cMateriasDP += ' ' + AllTrim(cMateriaA)
+            cMotivoA    := 'Reprovado,pois nao passou conselho'
+         else
+            cMotivoA    := 'Aprovado por conselho'
          endif
 
       endif
@@ -226,6 +238,16 @@ do while !lSair
          nDp++
          cColorB := 'W/R'
          cMateriasDP += ' ' + AllTrim(cMateriaB)
+         cMotivoB    := 'Reprova por'
+         
+         if nMediaNotaB < 6
+            cMotivoB += ' Nota'
+            if nTotalFaltaB > 48
+               cMotivoB += ' e Falta'
+            endif
+         else
+            cMotivoB += ' Falta'
+         endif
 
       elseif nTotalFaltaB > 47
          //conselho
@@ -266,6 +288,9 @@ do while !lSair
             nDp++
             cColorB := 'W/R'
             cMateriasDP += ' ' + AllTrim(cMateriaB)
+            cMotivoB    := 'Reprovado,pois nao passou conselho'
+         else
+            cMotivoB    := 'Aprovado por conselho'
          endif
 
       endif
@@ -276,6 +301,16 @@ do while !lSair
          nDp++
          cColorC := 'W/R'
          cMateriasDP += ' ' + AllTrim(cMateriaC)
+         cMotivoC    := 'Reprova por'
+         
+         if nMediaNotaC < 6
+            cMotivoC += ' Nota'
+            if nTotalFaltaC > 48
+               cMotivoC += ' e Falta'
+            endif
+         else
+            cMotivoC += ' Falta'
+         endif
 
       elseif nTotalFaltaC > 47
          //conselho
@@ -316,6 +351,10 @@ do while !lSair
             nDp++
             cColorC := 'W/R'
             cMateriasDP += ' ' + AllTrim(cMateriaC)
+            cMotivoC    := 'Reprovado,pois nao passou conselho'
+         else
+            cMotivoC    := 'Aprovado por conselho'
+         
          endif
 
       endif
@@ -325,6 +364,16 @@ do while !lSair
          nDp++
          cColorD := 'W/R'
          cMateriasDP += ' ' + AllTrim(cMateriaD)
+         cMotivoD    := 'Reprova por'
+         
+         if nMediaNotaD < 6
+            cMotivoD += ' Nota'
+            if nTotalFaltaD > 48
+               cMotivoD += ' e Falta'
+            endif
+         else
+            cMotivoD += ' Falta'
+         endif
 
       elseif nTotalFaltaD > 47
          //conselho
@@ -365,6 +414,9 @@ do while !lSair
             nDp++
             cColorD := 'W/R'
             cMateriasDP += ' ' + AllTrim(cMateriaD)
+            cMotivoD    := 'Reprovado,pois nao passou conselho'
+         else
+            cMotivoD    := 'Aprovado por conselho'
          endif
 
       endif
@@ -420,17 +472,16 @@ do while !lSair
       @ nLinha++,54 say Transform(nMediaNotaB,'@E 99.9') + '|' + Transform(nTotalFaltaB,'99') color(cColorB)
       @ nLinha++,54 say Transform(nMediaNotaC,'@E 99.9') + '|' + Transform(nTotalFaltaC,'99') color(cColorC)
       @ nLinha++,54 say Transform(nMediaNotaD,'@E 99.9') + '|' + Transform(nTotalFaltaD,'99') color(cColorD)
-      @ 20,01 say cResultado
-      @ 21,01 say cMensalidade
+      
+      @ ++nLinha,10 say 'Materia ' + Alltrim(cMateriaA) + ' ' + AllTrim(cMotivoA)
+      @ ++nLinha,10 say 'Materia ' + Alltrim(cMateriaB) + ' ' + AllTrim(cMotivoB)
+      @ ++nLinha,10 say 'Materia ' + Alltrim(cMateriaC) + ' ' + AllTrim(cMotivoC)
+      @ ++nLinha,10 say 'Materia ' + Alltrim(cMateriaD) + ' ' + AllTrim(cMotivoD)
+      @ ++nLinha,10 say cResultado
+      @ ++nLinha,10 say cMensalidade
 
+      lSair := .t.
       InKey(0)
-      nOpcao := alert('Deseja sair do programa?' , { 'Sim' , 'Nao' })
-      if nOpcao = 1
-         lSair := .t.
-         exit
-      else
-         exit
-      endif
    enddo
 enddo
 @ 23,01 say ''

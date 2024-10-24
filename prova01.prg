@@ -48,6 +48,10 @@ do while !lSair
       cMateriaB := Space(10)
       cMateriaC := Space(10)
       cMateriaD := Space(10)
+      cMotivoA  := 'Aprovado'
+      cMotivoB  := 'Aprovado'
+      cMotivoC  := 'Aprovado'
+      cMotivoD  := 'Aprovado'
 
       nNotaA1 := 0
       nNotaA2 := 0
@@ -84,7 +88,7 @@ do while !lSair
       nFaltaD4 := 0
 
       nLinha := 4
-      @ nLinha++,10 say '| Materias |  1�B  |  2�B  |  3�B  |  4�B  | Media |'
+      @ nLinha++,10 say '| Materias |  1 B  |  2 B  |  3 B  |  4 B  | Media |'
       @ nLinha++,10 say '|          | N  |F | N  |F | N  |F | N  |F | N  |F | '
       @ nLinha++,10 say '|          |    |  |    |  |    |  |    |  |    |  |'
       @ nLinha++,10 say '|          |    |  |    |  |    |  |    |  |    |  |'
@@ -143,7 +147,7 @@ do while !lSair
          if nOpcao = 1
             lSair := .t.
             exit
-         elseif nOpcao = 2  //come�o
+         elseif nOpcao = 2  //comeco
             exit
          else
             loop
@@ -161,25 +165,69 @@ do while !lSair
       nTotalFaltaD := nFaltaD1 + nFaltaD2 + nFaltaD3 + nFaltaD4
       nDp          := 0
       cMateriasDP  := ''
-
+      
+      //Aprovado ou reprovado
       if nMediaNotaA < 6 .or. nTotalFaltaA > 48
+         //reprova
          nDp++
          cMateriasDP += ' ' + AllTrim(cMateriaA)
+         cMotivoA    := 'Reprova por'
+         
+         if nMediaNotaA < 6
+            cMotivoA += ' Nota'
+            if nTotalFaltaA > 48
+               cMotivoA += ' e Falta'        
+            endif
+         else
+            cMotivoA += ' Falta'
+         endif
       endif
-
+//==========================
       if nMediaNotaB < 6 .or. nTotalFaltaB > 48
          nDp++
          cMateriasDP += ' ' + AllTrim(cMateriaB)
+         cMotivoB    := 'Reprova por'
+         
+         if nMediaNotaB < 6
+            cMotivoB += ' Nota'
+            if nTotalFaltaB > 48
+               cMotivoB += ' e Falta'
+            endif
+         else
+            cMotivoB += ' Falta'
+         endif
       endif
+
 
       if nMediaNotaC < 6 .or. nTotalFaltaC > 48
          nDp++
          cMateriasDP += ' ' + AllTrim(cMateriaC)
+         cMotivoC    := 'Reprova por'
+         
+         if nMediaNotaC < 6
+            cMotivoC += ' Nota'
+            if nTotalFaltaC > 48
+               cMotivoC += ' e Falta'
+            endif
+         else
+            cMotivoC += ' Falta'
+         endif
       endif
+
 
       if nMediaNotaD < 6 .or. nTotalFaltaD > 48
          nDp++
          cMateriasDP += ' ' + AllTrim(cMateriaD)
+         cMotivoD    := 'Reprova por'
+         
+         if nMediaNotaD < 6
+            cMotivoD += ' Nota'
+            if nTotalFaltaD > 48
+               cMotivoD += ' e Falta'
+            endif
+         else
+            cMotivoD += ' Falta'
+         endif
       endif
 
 //----------------------------------
@@ -201,6 +249,11 @@ do while !lSair
       @ nLinha++,54 say Transform(nMediaNotaB,'@E 99.9') + '|' + Transform(nTotalFaltaB,'99') 
       @ nLinha++,54 say Transform(nMediaNotaC,'@E 99.9') + '|' + Transform(nTotalFaltaC,'99') 
       @ nLinha++,54 say Transform(nMediaNotaD,'@E 99.9') + '|' + Transform(nTotalFaltaD,'99') 
+      
+      @ ++nLinha,10 say 'Materia ' + Alltrim(cMateriaA) + ' ' + AllTrim(cMotivoA)
+      @ ++nLinha,10 say 'Materia ' + Alltrim(cMateriaB) + ' ' + AllTrim(cMotivoB)
+      @ ++nLinha,10 say 'Materia ' + Alltrim(cMateriaC) + ' ' + AllTrim(cMotivoC)
+      @ ++nLinha,10 say 'Materia ' + Alltrim(cMateriaD) + ' ' + AllTrim(cMotivoD)
       @ ++nLinha,10 say cResultado
       @ ++nLinha,10 say cMensalidade
 
