@@ -4,8 +4,11 @@ set date to british
 set epoch to 1940
 set scoreboard off
 setmode(25,80)
-lSair := .f.
-dHoje := Date()
+
+lSair        := .f.
+dHoje        := Date()
+cCorVermelho := 'W/R'
+cCorVerde    := 'W/G'
 
 do while !lSair
 
@@ -91,6 +94,7 @@ do while !lSair
       cColorC := 'W/G'
       cColorD := 'W/G'
 
+
       nDp         := 0
       cMateriasDP := ''
 
@@ -149,11 +153,11 @@ do while !lSair
       @ nLinha  ,51 get nFaltaD4 valid nFaltaD4 >= 0                     picture '99'
       read
       if LastKey() == 27
-         nOpcao := alert('Deseja sair do programa?' , { 'Sim' , 'Voltar ao come�o' ,'Continuar digitando' })
+         nOpcao := alert('Deseja sair do programa?' , { 'Sim' , 'Voltar ao comeco' ,'Continuar digitando' })
          if nOpcao = 1
             lSair := .t.
             exit
-         elseif nOpcao = 2  //come�o
+         elseif nOpcao = 2  //comeco
             exit
          else
             loop
@@ -444,7 +448,7 @@ do while !lSair
             cMensalidade     := 'A mensalidade era de R$'+ AllTrim(Transform(nMensalidade,'@E 999,999.99')) + ',para R$'+ AllTrim(Transform(nMensalidadeNova,'@E 999,999.99'))
 
             if nDp < 2  //quantas
-               cResultado := 'O aluno ' + AllTrim(cNome) + ' foi APROVADO com '+ Transform(nDp,'9') +' DEPENDENCIA em ' + cMateriasDP
+               cResultado := 'O aluno ' + AllTrim(cNome) + ' foi  APROVADOcom '+ Transform(nDp,'9') +' DEPENDENCIA em ' + cMateriasDP
             else
                cResultado := 'O aluno ' + AllTrim(cNome) + ' foi REPROVADO com '+ AllTrim(Transform(nDp,'9')) +' DEPENDENCIAS em ' + cMateriasDP
             endif

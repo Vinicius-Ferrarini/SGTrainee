@@ -164,7 +164,7 @@ do while !lSair
       nTotalFaltaC := nFaltaC1 + nFaltaC2 + nFaltaC3 + nFaltaC4
       nTotalFaltaD := nFaltaD1 + nFaltaD2 + nFaltaD3 + nFaltaD4
       nDp          := 0
-      cMateriasDP  := ''
+      cMateriasDP  := Space(1)
       
       //Aprovado ou reprovado
       if nMediaNotaA < 6 .or. nTotalFaltaA > 48
@@ -175,10 +175,8 @@ do while !lSair
          
          if nMediaNotaA < 6
             cMotivoA += ' Nota'
-            if nTotalFaltaA > 48
-               cMotivoA += ' e Falta'        
-            endif
-         else
+         endif
+         if nTotalFaltaA > 48
             cMotivoA += ' Falta'
          endif
       endif
@@ -190,10 +188,8 @@ do while !lSair
          
          if nMediaNotaB < 6
             cMotivoB += ' Nota'
-            if nTotalFaltaB > 48
-               cMotivoB += ' e Falta'
-            endif
-         else
+         endif
+         if nTotalFaltaB > 48
             cMotivoB += ' Falta'
          endif
       endif
@@ -206,10 +202,8 @@ do while !lSair
          
          if nMediaNotaC < 6
             cMotivoC += ' Nota'
-            if nTotalFaltaC > 48
-               cMotivoC += ' e Falta'
-            endif
-         else
+         endif
+         if nTotalFaltaC > 48
             cMotivoC += ' Falta'
          endif
       endif
@@ -221,12 +215,10 @@ do while !lSair
          cMotivoD    := 'Reprova por'
          
          if nMediaNotaD < 6
-            cMotivoD += ' Nota'
-            if nTotalFaltaD > 48
-               cMotivoD += ' e Falta'
-            endif
-         else
-            cMotivoD += ' Falta'
+            cMotivoD += ' Nota |'
+         endif
+         if nTotalFaltaD > 48
+            cMotivoD += ' Falta |'
          endif
       endif
 
@@ -234,12 +226,12 @@ do while !lSair
       cResultado   := 'O aluno ' + AllTrim(cNome) + ' foi APROVADO em todas as materias!'
       cMensalidade := 'Mensalidade continua a mesma R$'+ AllTrim(Transform(nMensalidade,'@E 999,999.99'))
       if nDp > 0
-         nMensalidadeNova := nMensalidade * (nDp * 0.15 + 1)
-         cMensalidade     := 'A mensalidade era de R$'+ AllTrim(Transform(nMensalidade,'@E 999,999.99')) + ',para R$'+ AllTrim(Transform(nMensalidadeNova,'@E 999,999.99'))
          if nDp < 3
-            cResultado :=  'O aluno ' + AllTrim(cNome) + ' foi APROVADO com '+ Transform(nDp,'9') + ' DEPENDENCIAS em ' + cMateriasDP
+            nMensalidadeNova := nMensalidade * (nDp * 0.15 + 1)
+            cMensalidade     := 'A mensalidade era de R$'+ AllTrim(Transform(nMensalidade,'@E 999,999.99')) + ',para R$'+ AllTrim(Transform(nMensalidadeNova,'@E 999,999.99'))
+            cResultado       := 'O aluno ' + AllTrim(cNome) + ' foi APROVADO com '+ Transform(nDp,'9') + ' DEPENDENCIAS em ' + cMateriasDP
          else
-            cResultado :=  'O aluno ' + AllTrim(cNome) + ' foi REPROVADO com '+ Transform(nDp,'9') + ' DEPENDENCIAS em ' + cMateriasDP
+            cResultado       := 'O aluno ' + AllTrim(cNome) + ' foi REPROVADO com '+ Transform(nDp,'9') + ' DEPENDENCIAS em ' + cMateriasDP
          endif
       endif
 
