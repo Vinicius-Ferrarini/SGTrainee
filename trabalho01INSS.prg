@@ -68,11 +68,19 @@ do while .t.
       nLinha-=3
       @ nLinha,12   get cFuncionarioNome                   valid !Empty(cFuncionarioNome)                picture '@!'
       @ nLinha++,46 get cFuncionarioSexo                   valid cFuncionarioSexo $ 'MF'                 picture '@!'
+<<<<<<< Updated upstream
       @ nLinha,12   get dFuncionarioNascimento             valid dFuncionarioNascimento < dDataHoje .and. !Empty(dFuncionarioNascimento)
       @ nLinha,49   get dFuncionarioAdmissao               valid dFuncionarioAdmissao   > dFuncionarioNascimento .and. dFuncionarioAdmissao < dDataHoje
       @ nLinha++,69 get dFuncionarioDemissao               valid dFuncionarioDemissao   > dFuncionarioAdmissao   .and. dFuncionarioDemissao < dDataHoje  
       @ nLinha,12   get nFuncionarioSalarioBase            valid nFuncionarioSalarioBase > 0             picture '@E 999,999.99'
       @ nLinha++,53 get nFuncionarioLimiteIRRF             valid nFuncionarioLimiteIRRF  > 0             picture '@E 999,999.99'
+=======
+      @ nLinha,12   get dFuncionarioNascimento             valid dFuncionarioNascimento < dDataHoje      
+      @ nLinha,49   get dFuncionarioAdmissao               valid dFuncionarioAdmissao   < dFuncionarioNascimento
+      @ nLinha++,69 get dFuncionarioDemissao               valid dFuncionarioDemissao   < dFuncionarioAdmissao
+      @ nLinha,12   get nFuncionarioSalarioBase            valid nFuncionarioSalarioBase > 0             picture '999,999.99'
+      @ nLinha++,53 get nFuncionarioLimiteIRRF             valid nFuncionarioLimiteIRRF  > 0             picture '999,999.99'
+>>>>>>> Stashed changes
       @ nLinha,19   get nFuncionarioAdicionalNoturno       valid nFuncionarioAdicionalNoturno       >= 0 picture '99'
       @ nLinha,64   get nFuncionarioAdicionalInsalubridade valid nFuncionarioAdicionalInsalubridade >= 0 picture '99'  
       read
@@ -88,10 +96,17 @@ do while .t.
          endif
       endif
 
+<<<<<<< Updated upstream
       //Idade
       nFuncionarioDiaNascimento    := Day(dFuncionarioNascimento)
       nFuncionarioMesNascimento    := Month(dFuncionarioNascimento)
       nFuncionarioAnoNascimento    := Year(dFuncionarioNascimento)
+=======
+      //idade
+      
+
+
+>>>>>>> Stashed changes
       
       nFuncionarioIdade  := nAnoAtual - nFuncionarioAnoNascimento   
       if nMesAtual < nFuncionarioMesNascimento .or. (nMesAtual == nFuncionarioMesNascimento .and. nDiaAtual < nFuncionarioDiaNascimento)
