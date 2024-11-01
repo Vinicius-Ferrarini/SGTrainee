@@ -5,6 +5,7 @@ set epoch to 1940
 set scoreboard off
 setmode(25,80)
 
+
 dDataHoje    := date()
 nDiaAtual    := Day(dDataHoje)
 nMesAtual    := Month(dDataHoje)
@@ -13,11 +14,9 @@ nSemanaAtual := DoW(dDataHoje)
 cCorVermelho := 'W/R'
 cCorVerde    := 'W/G'
 
-
 //cabecalho
 cVendedorNome  := Space(30)
 dDataCotacao   := dDataHoje
-
 
 //pessoais
 cClienteNome   := Space(30)
@@ -77,6 +76,7 @@ read
 nVeiculoIdade         := nAnoAtual - nVeiculoAnoFabricacao
 nClienteAnoHabilitado := nAnoAtual - nClienteAnoCNH
 nMesCotacao           := Month(dDataCotacao)
+nAnoCotacao           := Year(dDataCotacao)
 
 nValorBase1 := nVeiculoValorFipe * 0.06
 nValorBase2 := nVeiculoValorFipe * 0.07
@@ -184,9 +184,13 @@ else
    cMesCotacao := 'Dezembro'
 endif
 
-nAnoCotacao            := Year(dDataCotacao)
-dDataCotacaoProximoMes := CToD(Str(01) + '/' + Transform(nMesCotacao+1,'99') + '/' + Str(nAnoCotacao))
-nDiasMesCotacao        := Day(dDataCotacaoProximoMes-1)
+
+if nMesCotacao == 12
+   nDiasMesCotacao := 31
+else
+   dDataCotacaoProximoMes := CToD('01/' + Transform(nMesCotacao+1,'99') + '/' + Str(nAnoCotacao))
+   nDiasMesCotacao        := Day(dDataCotacaoProximoMes-1)
+endif
 
 cCotacaoValida := 'Cotacao valida ate ' + Str(nDiasMesCotacao) + ' de ' + cMesCotacao + ' de ' + Str(nAnoCotacao)
 
@@ -213,20 +217,25 @@ nValorMensal2    := nValorTrimestre2 / 3
 @ nLinha,40 to nLinha+6,78 double
 
 nLinha++
-set color to cCorSeguradora1
-@ nLinha++,02 say 'Seguradora James Bond' color(cCorSeguradora1)
-@ nLinha,02 to nLinha++,38 double         color(cCorSeguradora1)
-@ nLinha++,02 say 'Mensal.....:' + Transform(nValorMensal1   ,'@E 9,999,999.99') color(cCorSeguradora1)
-@ nLinha++,02 say 'Trimestral.:' + Transform(nValorTrimestre1,'@E 9,999,999.99') color(cCorSeguradora1)
-@ nLinha  ,02 say 'Anual......:' + Transform(nValorAnual1    ,'@E 9,999,999.99') color(cCorSeguradora1)
+
+
+set color to (cCorSeguradora1)
+
+@ nLinha,02 clear to nLinha+4,38
+@ nLinha++,02 say 'Seguradora James Bond' 
+@ nLinha,02 to nLinha++,38 double         
+@ nLinha++,02 say 'Mensal.....:' + Transform(nValorMensal1   ,'@E 9,999,999.99') 
+@ nLinha++,02 say 'Trimestral.:' + Transform(nValorTrimestre1,'@E 9,999,999.99') 
+@ nLinha  ,02 say 'Anual......:' + Transform(nValorAnual1    ,'@E 9,999,999.99') 
 
 nLinha -= 4
-set color to cCorSeguradora2
-@ nLinha++,41 say 'Seguradora Magaiver' color(cCorSeguradora2)
-@ nLinha,41 to nLinha++,77 double       color(cCorSeguradora2)
-@ nLinha++,41 say 'Mensal.....:' + Transform(nValorMensal2   ,'@E 9,999,999.99') color(cCorSeguradora2)
-@ nLinha++,41 say 'Trimestral.:' + Transform(nValorTrimestre2,'@E 9,999,999.99') color(cCorSeguradora2)
-@ nLinha++,41 say 'Anual......:' + Transform(nValorAnual2    ,'@E 9,999,999.99') color(cCorSeguradora2)
+set color to (cCorSeguradora2)
+@ nLinha,41 clear to nLinha+4,77
+@ nLinha++,41 say 'Seguradora Magaiver' 
+@ nLinha,41 to nLinha++,77 double      
+@ nLinha++,41 say 'Mensal.....:' + Transform(nValorMensal2   ,'@E 9,999,999.99')
+@ nLinha++,41 say 'Trimestral.:' + Transform(nValorTrimestre2,'@E 9,999,999.99') 
+@ nLinha++,41 say 'Anual......:' + Transform(nValorAnual2    ,'@E 9,999,999.99')
 
 set color to w/0
 
