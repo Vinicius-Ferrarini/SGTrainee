@@ -35,12 +35,12 @@ do while .t.
 
 
    nLinha -= 4
-   @ nLinha++,20 get cClienteNome     valid !Empty(cClienteNome)     picture '@!'
-   @ nLinha++,20 get cTecnicoNome     valid !Empty(cTecnicoNome)     picture '@!'
-   @ nLinha++,20 get cEquipamentoDesc valid !Empty(cEquipamentoDesc) picture '@!'
+   @ nLinha++,20 get cClienteNome     valid !Empty(cClienteNome)      picture '@!'
+   @ nLinha++,20 get cTecnicoNome     valid !Empty(cTecnicoNome)      picture '@!'
+   @ nLinha++,20 get cEquipamentoDesc valid !Empty(cEquipamentoDesc)  picture '@!'
    @ nLinha,20   get dCompra          valid dCompra   <= dHoje
    @ nLinha++,54 get dOrdemServico    valid dOrdemServico <= dHoje
-   @ nLinha++,21   get cSolicitacao     valid cSolicitacao $ 'PS'      picture '@!'
+   @ nLinha++,21 get cSolicitacao     valid cSolicitacao $ 'PS'       picture '@!'
    read
    if LastKey() == 27
       nOpcao := alert('Deseja sair do programa?' , { 'Sim' , 'Nao' })
